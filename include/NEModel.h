@@ -61,6 +61,14 @@ typedef struct {
     m4x3 *mat;                ///< Transformation matrix assigned by the user.
 } NE_Model;
 
+typedef struct {
+    void *address;
+    int uses; // Number of models that use this mesh
+    bool has_to_free;
+} ne_mesh_info_t;
+
+extern ne_mesh_info_t *NE_Mesh;
+
 /// Creates a new model object.
 ///
 /// @param type Model type (static or animated).

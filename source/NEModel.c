@@ -12,13 +12,7 @@
 
 /// @file NEModel.c
 
-typedef struct {
-    void *address;
-    int uses; // Number of models that use this mesh
-    bool has_to_free;
-} ne_mesh_info_t;
-
-static ne_mesh_info_t *NE_Mesh = NULL;
+ne_mesh_info_t *NE_Mesh = NULL;
 static NE_Model **NE_ModelPointers;
 static int NE_MAX_MODELS;
 static bool ne_model_system_inited = false;
