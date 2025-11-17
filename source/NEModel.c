@@ -12,7 +12,7 @@
 
 /// @file NEModel.c
 
-ne_mesh_info_t *NE_Mesh = NULL;
+NE_MeshInfo *NE_Mesh = NULL;
 static NE_Model **NE_ModelPointers;
 static int NE_MAX_MODELS;
 static bool ne_model_system_inited = false;
@@ -62,7 +62,7 @@ static int ne_model_load_ram_common(NE_Model *model, const void *pointer)
 
     model->meshindex = slot;
 
-    ne_mesh_info_t *mesh = &NE_Mesh[slot];
+    NE_MeshInfo *mesh = &NE_Mesh[slot];
 
     mesh->address = (void *)pointer;
     mesh->has_to_free = false;
@@ -90,7 +90,7 @@ static int ne_model_load_filesystem_common(NE_Model *model, const char *path)
 
     model->meshindex = slot;
 
-    ne_mesh_info_t *mesh = &NE_Mesh[slot];
+    NE_MeshInfo *mesh = &NE_Mesh[slot];
 
     mesh->address = pointer;
     mesh->has_to_free = true;
@@ -217,7 +217,7 @@ void NE_ModelFreeMeshWhenDeleted(NE_Model *model)
     NE_AssertPointer(model, "NULL model pointer");
     if (model->meshindex != NE_NO_MESH)
     {
-        ne_mesh_info_t *mesh = &NE_Mesh[model->meshindex];
+        NE_MeshInfo *mesh = &NE_Mesh[model->meshindex];
         mesh->has_to_free = true;
     }
 }
@@ -303,7 +303,7 @@ void NE_ModelDraw(const NE_Model *model)
         NE_MaterialUse(model->texture);
     }
 
-    ne_mesh_info_t *mesh = &NE_Mesh[model->meshindex];
+    NE_MeshInfo *mesh = &NE_Mesh[model->meshindex];
     const void *meshdata = mesh->address;
 
     if (model->modeltype == NE_Static)
@@ -365,7 +365,7 @@ void NE_ModelClone(NE_Model *dest, NE_Model *source)
     // count of users of that mesh.
     if (dest->meshindex != NE_NO_MESH)
     {
-        ne_mesh_info_t *mesh = &NE_Mesh[dest->meshindex];
+        NE_MeshInfo *mesh = &NE_Mesh[dest->meshindex];
         mesh->uses++;
     }
 }
@@ -614,7 +614,7 @@ int NE_ModelSystemReset(int max_models)
     else
         NE_MAX_MODELS = max_models;
 
-    NE_Mesh = calloc(NE_MAX_MODELS, sizeof(ne_mesh_info_t));
+    NE_Mesh = calloc(NE_MAX_MODELS, sizeof(NE_MeshInfo));
     NE_ModelPointers = calloc(NE_MAX_MODELS, sizeof(NE_ModelPointers));
     if ((NE_Mesh == NULL) || (NE_ModelPointers == NULL))
     {

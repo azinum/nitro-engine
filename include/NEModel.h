@@ -65,9 +65,9 @@ typedef struct {
     void *address;
     int uses; // Number of models that use this mesh
     bool has_to_free;
-} ne_mesh_info_t;
+} NE_MeshInfo;
 
-extern ne_mesh_info_t *NE_Mesh;
+extern NE_MeshInfo *NE_Mesh;
 
 /// Creates a new model object.
 ///
