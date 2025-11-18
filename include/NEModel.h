@@ -353,6 +353,8 @@ int NE_ModelLoadDSM(NE_Model *model, const void *pointer);
 /// @return It returns 1 on success, 0 on error.
 int NE_ModelLoadDSMFAT(NE_Model *model, const char *path);
 
+NE_MeshInfo* NE_ModelGetMeshInfo(NE_Model *model);
+
 /// Deletes all models and frees all memory used by them.
 void NE_ModelDeleteAll(void);
 

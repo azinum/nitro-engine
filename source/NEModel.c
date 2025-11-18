@@ -582,6 +582,14 @@ int NE_ModelLoadDSMFAT(NE_Model *model, const char *path)
     return ne_model_load_filesystem_common(model, path);
 }
 
+NE_MeshInfo* NE_ModelGetMeshInfo(NE_Model *model)
+{
+    if (model->meshindex != NE_NO_MESH)
+      return NULL;
+
+    return &NE_Mesh[model->meshindex];
+}
+
 int NE_ModelLoadDSM(NE_Model *model, const void *pointer)
 {
     if (!ne_model_system_inited)
