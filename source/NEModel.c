@@ -584,7 +584,7 @@ int NE_ModelLoadDSMFAT(NE_Model *model, const char *path)
 
 NE_MeshInfo* NE_ModelGetMeshInfo(NE_Model *model)
 {
-    if (model->meshindex != NE_NO_MESH)
+    if (model->meshindex == NE_NO_MESH)
       return NULL;
 
     return &NE_Mesh[model->meshindex];
